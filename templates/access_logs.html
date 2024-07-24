@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Access Logs</h2>
+{% if access_logs %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Action</th>
+            <th>Success</th>
+            <th>Timestamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in access_logs %}
+        <tr>
+            <td>{{ log.id }}</td>
+            <td>{{ log.username }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.success }}</td>
+            <td>{{ log.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No access logs found.</p>
+{% endif %}
+{% endblock %}

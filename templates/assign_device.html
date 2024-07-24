@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Assign Device to Role</h2>
+<form method="POST" action="{{ url_for('assign_device') }}">
+    <div class="form-group">
+        <label for="device_id">Device</label>
+        <select name="device_id" id="device_id" class="form-control">
+            {% for device in devices %}
+            <option value="{{ device.id }}">{{ device.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="role_id">Role</label>
+        <select name="role_id" id="role_id" class="form-control">
+            {% for role in roles %}
+            <option value="{{ role.id }}">{{ role.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Assign</button>
+</form>
+
+<h2>Remove Device Assignment from Role</h2>
+<form method="POST" action="{{ url_for('remove_assignment') }}">
+    <div class="form-group">
+        <label for="device_id_remove">Device</label>
+        <select name="device_id" id="device_id_remove" class="form-control">
+            {% for device in devices %}
+            <option value="{{ device.id }}">{{ device.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="role_id_remove">Role</label>
+        <select name="role_id" id="role_id_remove" class="form-control">
+            {% for role in roles %}
+            <option value="{{ role.id }}">{{ role.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-danger">Remove Assignment</button>
+</form>
+{% endblock %}

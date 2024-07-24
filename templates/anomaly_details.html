@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Anomaly Details</h2>
+{% if alert %}
+<div class="card">
+    <div class="card-header">
+        Anomaly ID: {{ alert.id }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Alert Type: {{ alert.alert_type }}</h5>
+        <p class="card-text"><strong>Timestamp:</strong> {{ alert.timestamp }}</p>
+        <p class="card-text"><strong>Source IP:</strong> {{ alert.src_ip }}</p>
+        <p class="card-text"><strong>Destination IP:</strong> {{ alert.dst_ip }}</p>
+        <p class="card-text"><strong>Protocol:</strong> {{ alert.protocol }}</p>
+        <p class="card-text"><strong>Packet Length:</strong> {{ alert.packet_length }}</p>
+        <!-- Add more alert details as needed -->
+    </div>
+</div>
+<a href="{{ url_for('anomalies') }}" class="btn btn-primary mt-3">Back to Anomalies</a>
+{% else %}
+<p>No anomaly details found.</p>
+{% endif %}
+{% endblock %}

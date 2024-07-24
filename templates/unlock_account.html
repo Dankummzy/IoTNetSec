@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Unlock Account</h2>
+        <p>Are you sure you want to unlock the account for {{ username }}?</p>
+        <form method="POST" action="{{ url_for('unlock_account_confirm', username=username) }}">
+            <button type="submit" class="btn btn-primary">Unlock Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

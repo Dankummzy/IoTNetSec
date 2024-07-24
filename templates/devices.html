@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Devices</h2>
+
+{% if current_user.role.name == 'Owner' %}
+<div class="mb-3">
+    <a href="{{ url_for('add_device') }}" class="btn btn-primary">Add Device</a>
+</div>
+<div class="mb-3">
+    <a href="{{ url_for('assign_device') }}" class="btn btn-primary">Assign Device to Role</a>
+</div>
+{% endif %}
+
+<div class="row">
+    {% for device in devices %}
+    <div class="col-md-4">
+        <div class="card mb-4 {{ 'bg-success' if device.status else 'bg-secondary' }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ device.name }}</h5>
+                <p class="card-text">{{ 'On' if device.status else 'Off' }}</p>
+                {% if current_user.role.name == 'Owner' or device.user_id == current_user.id %}
+                <form method="POST" action="{{ url_for('toggle_device', device_id=device.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-secondary">{{ 'Turn Off' if device.status else 'Turn On' }}</button>
+                </form>
+                <a href="{{ url_for('device_detail', device_id=device.id) }}" class="btn btn-info">Edit</a>
+                <form method="POST" action="{{ url_for('delete_device', device_id=device.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Anomalies</h2>
+{% if alerts.items %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Alert Type</th>
+            <th>Timestamp</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alert in alerts.items %}
+        <tr>
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.alert_type }}</td>
+            <td>{{ alert.timestamp }}</td>
+            <td><a href="{{ url_for('anomaly_details', alert_id=alert.id) }}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if alerts.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('anomalies', page=alerts.prev_num) }}">Previous</a>
+        </li>
+        {% endif %}
+        {% for page_num in alerts.iter_pages() %}
+        <li class="page-item {% if page_num == alerts.page %}active{% endif %}">
+            <a class="page-link" href="{{ url_for('anomalies', page=page_num) }}">{{ page_num }}</a>
+        </li>
+        {% endfor %}
+        {% if alerts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('anomalies', page=alerts.next_num) }}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% else %}
+<p>No anomalies found.</p>
+{% endif %}
+{% endblock %}

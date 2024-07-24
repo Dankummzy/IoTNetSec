@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Welcome to Smart Home System</h1>
+    <p class="lead">Manage your smart home devices and ensure security with ease.</p>
+    {% if is_authenticated %}
+        <a href="{{ url_for('devices') }}" class="btn btn-primary btn-lg">View Devices</a>
+    {% endif %}
+</div>
+{% endblock %}

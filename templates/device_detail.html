@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Device</h2>
+<form method="POST" action="{{ url_for('device_detail', device_id=device.id) }}">
+    <div class="form-group">
+        <label for="device_name">Device Name</label>
+        <input type="text" class="form-control" id="device_name" name="device_name" value="{{ device.name }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Device</button>
+</form>
+{% endblock %}
